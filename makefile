@@ -2,4 +2,4 @@
 test: nodeunit
 
 nodeunit:
-	nodeunit test/mongodb-socket.test.js
+	nodeunit test/socket.test.js

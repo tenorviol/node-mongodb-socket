@@ -1,4 +1,4 @@
-var socket = require('../lib/mongodb-socket');
+var socket = require('../lib/mongodb/socket');
 var mongodb = require('mongodb');
 
 var server;
