@@ -2,5 +2,5 @@
 test: nodeunit
 
 nodeunit:
-	nodeunit test/reader.test.js
-	nodeunit test/socket.test.js
+	nodeunit test/protocol.test.js
+	#nodeunit test/socket.test.js

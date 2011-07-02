@@ -1,4 +1,5 @@
 var WireReader = require('../lib/mongodb/WireReader');
+var WireWriter = require('../lib/mongodb/WireWriter');
 
 var tests = [
 
@@ -32,17 +33,18 @@ var tests = [
 
 ].forEach(function (test) {
   
-  exports['single, op code ' + test.message.opCode] = function (assert) {
+  exports['read single, op code ' + test.message.opCode] = function (assert) {
     var reader = new WireReader();
     reader.on('message', function (message, buffer) {
       assert.deepEqual(test.message, message);
       assert.equal(test.buffer.toString('binary'), buffer.toString('binary'));
       assert.done();
     });
+    
     reader.write(test.buffer);
   };
   
-  exports['double, op code ' + test.message.opCode] = function (assert) {
+  exports['read double, op code ' + test.message.opCode] = function (assert) {
     var reader = new WireReader();
     var count = 0;
     reader.on('message', function (message, buffer) {
@@ -61,7 +63,7 @@ var tests = [
     }, 10);
   };
   
-  exports['fragmented, op code ' + test.message.opCode] = function (assert) {
+  exports['read fragmented, op code ' + test.message.opCode] = function (assert) {
     var reader = new WireReader();
     reader.on('message', function (message, buffer) {
       assert.deepEqual(test.message, message);
@@ -74,6 +76,16 @@ var tests = [
       one_byte[0] = test.buffer[i];
       reader.write(one_byte);
     }
+  };
+  
+  exports['write, op code ' + test.message.opCode] = function (assert) {
+    var writer = new WireWriter();
+    writer.on('data', function (buffer) {
+      assert.equal(test.buffer.toString('binary'), buffer.toString('binary'));
+      assert.done();
+    });
+    
+    writer.write(test.message);
   };
   
 });
