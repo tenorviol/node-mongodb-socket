@@ -62,8 +62,18 @@ var tests = [
   };
   
   exports['fragmented, op code ' + test.message.opCode] = function (assert) {
-    // TODO
-    assert.done();
+    var reader = new WireReader();
+    reader.on('message', function (message, buffer) {
+      assert.deepEqual(test.message, message);
+      assert.equal(test.buffer.toString('binary'), buffer.toString('binary'));
+      assert.done();
+    });
+    
+    var one_byte = new Buffer(1);
+    for (var i = 0; i < test.buffer.length; i++) {
+      one_byte[0] = test.buffer[i];
+      reader.write(one_byte);
+    }
   };
   
 });
