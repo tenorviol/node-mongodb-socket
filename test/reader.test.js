@@ -1,6 +1,6 @@
-var MongoStream = require('../lib/mongodb/MongoStream');
+var WireReader = require('../lib/mongodb/WireReader');
 
-var stream = new MongoStream();
+var stream = new WireReader();
 
 stream.on('message', function(msg) {
   console.log(msg);
