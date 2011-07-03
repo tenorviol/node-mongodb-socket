@@ -22,12 +22,38 @@ var tests = [
       responseTo: 0,
       opCode: 2004,
       flags: 16,
-      fullCollectionName: 'test.$cmd',
+      collection: 'test.$cmd',
       numberToSkip: 0,
       numberToReturn: -1,
       query: {
         ismaster: 1
       }
+    }
+  },
+  
+  {
+    buffer : new Buffer([
+      0x36, 0, 0, 0,
+      0, 0, 0, 0,
+      0, 0, 0, 0,
+      1, 0, 0, 0,
+      0, 0, 0, 0,
+      0, 0, 0, 0, 0, 0, 0, 0,
+      0, 0, 0, 0,
+      1, 0, 0, 0,
+      0x12, 0, 0, 0,
+      2, 0x66, 0x6f, 0x6f, 0, 4, 0, 0, 0, 0x62, 0x61, 0x72, 0, 0
+    ]),
+    message : {
+      messageLength: 54,
+      requestID: 0,
+      responseTo: 0,
+      opCode: 1,
+      flags: 0,
+      cursorID: 0,
+      startingFrom: 0,
+      numberReturned: 1,
+      documents: { foo: 'bar' }
     }
   }
 
