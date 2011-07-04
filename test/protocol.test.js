@@ -17,7 +17,6 @@ var tests = [
       0x10, 0x69, 0x73, 0x6d, 0x61, 0x73, 0x74, 0x65, 0x72, 0, 0x01, 0, 0, 0, 0
     ]),
     message : {
-      messageLength: 57,
       requestID: 1,
       responseTo: 0,
       opCode: 2004,
@@ -45,7 +44,6 @@ var tests = [
       2, 0x66, 0x6f, 0x6f, 0, 4, 0, 0, 0, 0x62, 0x61, 0x72, 0, 0
     ]),
     message : {
-      messageLength: 54,
       requestID: 0,
       responseTo: 0,
       opCode: 1,
@@ -53,7 +51,9 @@ var tests = [
       cursorID: 0,
       startingFrom: 0,
       numberReturned: 1,
-      documents: { foo: 'bar' }
+      documents: [
+        { foo: 'bar' }
+      ]
     }
   }
 
