@@ -214,7 +214,7 @@ var tests = [
   
 ].forEach(function (test) {
   
-  exports['read single, op code ' + test.name] = function (assert) {
+  exports[test.name + ', read'] = function (assert) {
     var reader = new WireReader();
     reader.on('message', function (message, buffer) {
       assert.deepEqual(test.message, message);
@@ -225,7 +225,7 @@ var tests = [
     reader.write(test.buffer);
   };
   
-  exports['read double, op code ' + test.name] = function (assert) {
+  exports[test.name + ', read double'] = function (assert) {
     var reader = new WireReader();
     var count = 0;
     reader.on('message', function (message, buffer) {
@@ -244,7 +244,7 @@ var tests = [
     }, 10);
   };
   
-  exports['read fragmented, op code ' + test.name] = function (assert) {
+  exports[test.name + ', read fragmented'] = function (assert) {
     var reader = new WireReader();
     reader.on('message', function (message, buffer) {
       assert.deepEqual(test.message, message);
@@ -259,13 +259,16 @@ var tests = [
     }
   };
   
-  exports['write, op code ' + test.name] = function (assert) {
+  exports[test.name + ', write'] = function (assert) {
     var writer = new WireWriter();
     writer.on('data', function (buffer) {
-      assert.equal(test.buffer.toString('binary'), buffer.toString('binary'));
-      assert.done();
+      var reader = new WireReader();
+      reader.on('message', function (message) {
+        assert.deepEqual(test.message, message);
+        assert.done();
+      });
+      reader.write(buffer);
     });
-    
     writer.write(test.message);
   };
   
