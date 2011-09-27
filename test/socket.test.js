@@ -4,8 +4,6 @@ var mongodb = require('mongodb');
 var server;
 var port = 3000;
 
-console.log(process);
-
 exports['test server'] = function (assert) {
   server = socket.createServer(function (message, res) {
     console.log(message);
